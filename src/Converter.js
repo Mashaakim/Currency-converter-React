@@ -17,6 +17,7 @@ class App extends React.Component {
   componentDidMount () {
     axios.get(url)
       .then(d => {
+          console.log(d.data.Valute);
         this.setState({
           valutes: d.data.Valute,
           selected_valute_1: Object.values(d.data.Valute)[0],

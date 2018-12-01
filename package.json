@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "chart.js": "^2.7.3",
     "react": "^16.6.3",
+    "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
+    "react-google-charts": "^3.0.10",
+    "react-scripts": "2.1.1",
+    "recharts": "^1.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

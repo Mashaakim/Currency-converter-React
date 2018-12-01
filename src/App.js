@@ -2,25 +2,26 @@
 
 import React from 'react';
 import Converter from './Converter'
+import Graph from './Graph'
 
 class App extends React.Component {
 
   state = {
     value: 0,
-  }
+  };
 
   render = () => {
     return (
       <div>
         <div>
-          <button onClick={() => {this.setState({value: 0})}} >1</button>
-          <button onClick={() => {this.setState({value: 1})}} >2</button>
+          <button onClick={() => {this.setState({value: 0})}} >Currency converter</button>
+          <button onClick={() => {this.setState({value: 1})}} >Chart</button>
         </div>
 
         {
           this.state.value === 0
             ? <Converter/>
-            : <div>вкладка 2</div>
+            : <Graph/>
         }
 
       </div>
