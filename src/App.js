@@ -3,6 +3,8 @@
 import React from 'react';
 import Converter from './Converter'
 import Graph from './Graph'
+import './App.css';
+import Button from './components/Button/Button'
 
 class App extends React.Component {
 
@@ -12,10 +14,10 @@ class App extends React.Component {
 
   render = () => {
     return (
-      <div>
+      <div className="App">
         <div>
-          <button onClick={() => {this.setState({value: 0})}} >Currency converter</button>
-          <button onClick={() => {this.setState({value: 1})}} >Chart</button>
+          <Button onClick={() => {this.setState({value: 0})}} >Currency converter</Button>
+          <Button onClick={() => {this.setState({value: 1})}} >Chart</Button>
         </div>
 
         {

@@ -3,6 +3,9 @@
 import React from 'react';
 import axios from 'axios';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
+import Button from './components/Button/Button'
+import InputForm from './components/InputForm/InputForm'
+import SelectForm from './components/SelectForm/SelectForm';
 
 
 class Graph extends React.Component {
@@ -43,11 +46,8 @@ class Graph extends React.Component {
         this.setState({end_date: String(event.target.value)})
     };
 
-    onClick = () => {
-        this.setState({
-        url: 'https://api.exchangeratesapi.io/history?start_at=' + this.state.start_date + '&end_at=' + this.state.end_date + '&base=RUB',
-        });
-        axios.get(this.state.url)
+    get = (url) => {
+        axios.get(url)
             .then(d => {
                 this.setState({
                     valutes: Object.keys(Object.values(d.data.rates)[0]),
@@ -60,7 +60,16 @@ class Graph extends React.Component {
                         return res }).sort((a,b) => (a.date > b.date)),
                 })
             })
+    };
 
+    onClick = () => {
+        this.setState({
+        url: 'https://api.exchangeratesapi.io/history?start_at=' + this.state.start_date + '&end_at=' + this.state.end_date + '&base=RUB',
+        });
+        this.get(this.state.url);
+    };
+    calendar = (event) => {
+        console.log(event.target.value)
     };
 
     render () {
@@ -68,17 +77,17 @@ class Graph extends React.Component {
         let data = this.state.data;
         return (
             <div>
-                <input
-                    type="text"
+                <InputForm
+                    type="date"
                     value={this.state.start_date}
                     onChange={this.inputStartHandler}
                 />
-                <input
-                    type="text"
+                <InputForm
+                    type="date"
                     value={this.state.end_date}
                     onChange={this.inputEndHandler}
                 />
-                <select
+                <SelectForm
                     value={this.state.selected_valute}
                     onChange={this.selectHandler}
                 >
@@ -91,11 +100,11 @@ class Graph extends React.Component {
                             )
                         })
                     }
-                </select>
-                <button onClick={this.onClick} >
+                </SelectForm>
+                <Button onClick={this.onClick} >
                     Draw
-                </button>
-            <LineChart width={700} height={400} data={data}
+                </Button>
+            <LineChart width={700} height={500} data={data}
                        margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                 <XAxis dataKey="date"/>
                 <YAxis/>
