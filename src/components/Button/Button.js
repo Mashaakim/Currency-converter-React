@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'reactstrap';
 import './Button.css';
 
 export default class ButtonForm extends Component {
@@ -7,9 +8,9 @@ export default class ButtonForm extends Component {
         const { className,  onClick, children } = this.props;
 
         return (
-            <button className={className} onClick={onClick} >
+            <Button className={className} onClick={onClick} >
                 {children}
-            </button>
+            </Button>
         );
     }
 }

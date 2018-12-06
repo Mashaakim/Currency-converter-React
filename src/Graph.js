@@ -68,9 +68,6 @@ class Graph extends React.Component {
         });
         this.get(this.state.url);
     };
-    calendar = (event) => {
-        console.log(event.target.value)
-    };
 
     render () {
         let dataKey = this.state.selected_valute;
