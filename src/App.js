@@ -1,8 +1,8 @@
 /*eslint-disable no-unused-vars*/
 
 import React from 'react';
-import Converter from './Converter'
-import Graph from './Graph'
+import Converter from './components/Converter/Converter'
+import Graph from './components/Graph/Graph'
 import './App.css';
 import Button from './components/Button/Button'
 

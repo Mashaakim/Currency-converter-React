@@ -1,5 +1,7 @@
 button {
     background-color: #FFF5EE;
+    color: inherit;
+    margin: auto;
     padding: 12px 15px;
     font-family: "Courier New";
 }

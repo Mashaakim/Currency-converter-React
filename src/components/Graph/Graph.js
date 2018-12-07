@@ -3,9 +3,10 @@
 import React from 'react';
 import axios from 'axios';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
-import Button from './components/Button/Button'
-import InputForm from './components/InputForm/InputForm'
-import SelectForm from './components/SelectForm/SelectForm';
+import Button from '../Button/Button'
+import InputForm from '../InputForm/InputForm'
+import SelectForm from '../SelectForm/SelectForm';
+import Chart from '../Chart/Chart'
 
 
 class Graph extends React.Component {
@@ -21,17 +22,20 @@ class Graph extends React.Component {
     componentDidMount (){
         axios.get(this.state.url)
             .then(d => {
+                let datesUnsorted = Object.keys(d.data.rates).map(function(key) {
+                    let res = d.data.rates[key];
+                    Object.keys(res).map(function(k) {
+                        res[k] = 1.0 / res[k];
+                    });
+                    res['date'] = key;
+                    return res });
                 this.setState({
-                        valutes: Object.keys(Object.values(d.data.rates)[0]),
-                        data: Object.keys(d.data.rates).map(function(key) {
-                            let res = d.data.rates[key];
-                            Object.keys(res).map(function(k) {
-                                res[k] = 1.0 / res[k];
-                            });
-                            res['date'] = key;
-                            return res }).sort((a,b) => (a.date > b.date)),
-                    })
-                })
+                    valutes: Object.keys(Object.values(d.data.rates)[0]),
+                    data: datesUnsorted.sort( function (a,b) {
+                        if (a.date > b.date) return 1;
+                        else return -1;}),
+                });
+            });
     }
 
     selectHandler = (event) => {
@@ -49,17 +53,20 @@ class Graph extends React.Component {
     get = (url) => {
         axios.get(url)
             .then(d => {
+                let datesUnsorted = Object.keys(d.data.rates).map(function(key) {
+                    let res = d.data.rates[key];
+                    Object.keys(res).map(function(k) {
+                        res[k] = 1.0 / res[k];
+                    });
+                    res['date'] = key;
+                    return res });
                 this.setState({
                     valutes: Object.keys(Object.values(d.data.rates)[0]),
-                    data: Object.keys(d.data.rates).map(function(key) {
-                        let res = d.data.rates[key];
-                        Object.keys(res).map(function(k) {
-                            res[k] = 1.0 / res[k];
-                        });
-                        res['date'] = key;
-                        return res }).sort((a,b) => (a.date > b.date)),
-                })
-            })
+                    data: datesUnsorted.sort( function (a,b) {
+                        if (a.date > b.date) return 1;
+                        else return -1;}),
+                });
+            });
     };
 
     onClick = () => {
@@ -101,15 +108,8 @@ class Graph extends React.Component {
                 <Button onClick={this.onClick} >
                     Draw
                 </Button>
-            <LineChart width={700} height={500} data={data}
-                       margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                <XAxis dataKey="date"/>
-                <YAxis/>
-                <CartesianGrid strokeDasharray="3 3"/>
-                <Tooltip/>
-                <Legend />
-                <Line type="monotone" dataKey={dataKey} stroke="#8884d8" activeDot={{r: 8}}/>
-            </LineChart>
+                <Chart data={data} dataKey={dataKey}>
+                </Chart>
             </div>
         );
     }

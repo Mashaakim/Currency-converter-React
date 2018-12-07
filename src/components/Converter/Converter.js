@@ -3,9 +3,9 @@
 import React from 'react';
 import axios from 'axios';
 import './Converter.css';
-import SelectForm from './components/SelectForm/SelectForm';
-import Button from './components/Button/Button';
-import InputForm from './components/InputForm/InputForm';
+import SelectForm from '../SelectForm/SelectForm';
+import Button from '../Button/Button';
+import InputForm from '../InputForm/InputForm';
 
 let url = `https://www.cbr-xml-daily.ru/daily_json.js`;
 
@@ -16,6 +16,7 @@ class App extends React.Component {
     selected_valute_1: {},
     selected_valute_2: {},
     inputted_value: ``,
+      timestamp: '',
   };
 
   componentDidMount () {
@@ -31,6 +32,7 @@ class App extends React.Component {
           valutes: valute,
           selected_valute_1: Object.values(d.data.Valute)[0],
           selected_valute_2: Object.values(d.data.Valute)[0],
+            timestamp: d.data.Timestamp,
         })
       })
   }
@@ -102,6 +104,9 @@ class App extends React.Component {
                 {result + ' ' + this.state.selected_valute_2.CharCode}
             </p>
         </div>
+          <div className="time">
+              {'Last updated: ' + this.state.timestamp}
+          </div>
       </div>
     )
   }
