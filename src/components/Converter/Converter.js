@@ -9,7 +9,7 @@ import InputForm from '../InputForm/InputForm';
 
 let url = `https://www.cbr-xml-daily.ru/daily_json.js`;
 
-class App extends React.Component {
+class Converter extends React.Component {
 
   state = {
     valutes: {},
@@ -59,6 +59,9 @@ class App extends React.Component {
     let result = (this.state.inputted_value * this.state.selected_valute_1.Value / this.state.selected_valute_2.Value).toFixed(4)
     return (
       <div>
+          <div>
+              <span className="amount"> Amount </span>
+          </div>
         <InputForm
           value={this.state.inputted_value}
           onChange={this.inputHandler}
@@ -112,6 +115,6 @@ class App extends React.Component {
   }
 }
 
-export default (App)
+export default Converter;
 
 /*eslint-enable no-unused-vars*/

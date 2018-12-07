@@ -2,11 +2,11 @@
 
 import React from 'react';
 import axios from 'axios';
-import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 import Button from '../Button/Button'
 import InputForm from '../InputForm/InputForm'
 import SelectForm from '../SelectForm/SelectForm';
 import Chart from '../Chart/Chart'
+import './Graph.css';
 
 
 class Graph extends React.Component {
@@ -81,6 +81,9 @@ class Graph extends React.Component {
         let data = this.state.data;
         return (
             <div>
+                <div>
+                    <span className="from"> From </span> <span className="to"> To </span>
+                </div>
                 <InputForm
                     type="date"
                     value={this.state.start_date}
