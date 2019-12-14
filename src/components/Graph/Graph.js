@@ -13,7 +13,7 @@ class Graph extends React.Component {
     state = {
         start_date: '2018-11-11',
         end_date: '2018-11-30',
-        url: 'https://api.exchangeratesapi.io/history?start_at=2018-11-11&end_at=2018-11-30&base=RUB',
+        url: 'https://api.exchangeratesapi.io/history?start_at=2019-11-11&end_at=2019-11-30&base=RUB',
         selected_valute: 'EUR',
         valutes: [],
         data: []

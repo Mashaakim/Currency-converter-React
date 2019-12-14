@@ -89,6 +89,7 @@ class Converter extends React.Component {
           </Button>
         <SelectForm
           value={this.state.selected_valute_2.CharCode}
+
           onChange={this.selectHandler_2}
         >
           {
